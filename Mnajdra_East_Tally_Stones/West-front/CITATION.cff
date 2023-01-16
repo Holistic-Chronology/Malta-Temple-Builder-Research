@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this data, please cite it as below."
+authors:
+- family-names: "Poell"
+  given-names: "Ronald"
+  orcid: "https://orcid.org/0000-0002-1161-5911"
+title: "Mnajdra-East, Tally stone west, front: Svg files of the analysed holes"
+version: 1.0
+date-released: 2023-01-16
+url: "https://github.com/Holistic-Chronology/Malta-Temple-Builder-Research/blob/main/Mnajdra_East_Tally_Stones/West-front"
