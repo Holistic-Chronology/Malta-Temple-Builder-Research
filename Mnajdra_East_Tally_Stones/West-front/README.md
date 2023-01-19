@@ -15,3 +15,5 @@ The png images are screenshots of the svg representation and provided to have a 
 The source photo's are linked from [gaia-online](https://gaia-online.eu/).
 
 The repository contains citation files.
+
+The data is used in [Equinox play of light and shadow at Mnajdra](https://www.researchgate.net/publication/344868942_Equinox_play_of_light_and_shadow_at_Mnajdra)
