@@ -1,0 +1,492 @@
+{
+  "info": {
+    "reference": {
+      "date_generated": "2021-05-27T07:35:19.000Z",
+      "data_version": "1.01",
+      "description": "Set of azimuth / altitude pairs from Mnajdra North Room 7 point M-1028-Top-lower-back-upright+0-2",
+      "author": {
+        "name": "Ronald Poell",
+        "profile": "https://www.researchgate.net/profile/Ronald-Poell"
+      },
+      "url": ""
+    },
+    "project": {
+      "name": "A holistic approach to the temple builder society in Malta",
+      "url": "https://www.researchgate.net/project/A-holistic-approach-to-the-temple-builder-society-in-Malta",
+      "sponsoring_bitcoin_address": "1LDuLDeuvbbjj8tprt7M7ThGYbaJV4BycL"
+    },
+    "software": {
+      "QGis": {
+        "version": "3.16.2",
+        "url": "https://qgis.org"
+      },
+      "get_horizon_data.js": {
+        "version": "1.04",
+        "author": "Ronald Poell",
+        "url": ""
+      }
+    },
+    "sources": {
+      "source_point": {
+        "name": "M-1028",
+        "description": "Mnajdra North, Center left seat against back upright",
+        "latitude": 35.826784019435934,
+        "longitude": 14.436240233803506,
+        "elevation": 85.37999725341797,
+        "source": "Coordinates from the GNSS survey of Hertitage Malta (Katya Stroud, Josef Caruana) and Ronald Poell on 2021-01-27",
+        "source_reference": "distances from GNSS M-1016 6.792 m, GNSS M-1017 5.979 m, GNSS M-1018 1.892 m, GNSS M-1019 4.701 m",
+        "used_elevation": "ground (85.38) + hight of the seat (0.42) + height lower upright (1.325) + simulated elevation change (0.00) = 87.125, horizon lowered by 2 meters"
+      },
+      "DTM": "SIntegraM data/service, (2018), Developing Spatial Data Integration for the Maltese Islands, Planning Authority, DTM_WGS84 (The DTM of Malta in WGS84 projection)",
+      "seaLevel_altitude": -0.48
+    },
+    "process": {
+      "step_1": {
+        "name": "Merging DTM tiles",
+        "description": "The tiles T4964 and T4965 have been merged using gdal because the tool used for the elevation profiles does not work across several tiles.\ngdal_merge.py -ot Float32 -of GTiff -o /Path_To_Output/T4964-T4965.tif --optfile mergeInputFiles.txt\nmergeInputFiles.txt:\n\"/Path_To_Input/T4964.tif\"\n\"/Path_To_Input/T4965.tif\""
+      },
+      "step_2": {
+        "name": "Create to horizon azimuths in QGis",
+        "description": "Using \"Geodesic measure tool\", manually add the starting point (M-1011) coordinates.\nDraw a line to the end of the DTM tile.\nSave the to a (temporary) layer\nExport that layer in GeoJSON format (pattern : M-1011-[Azimuth].geojson) with CRS: EPSG:4326 - WGS 84"
+      },
+      "step_3": {
+        "name": "Create the elevation profiles in QGis",
+        "description": "Using the \"Terrain profile\" tool:\nAdd the DTM tile\nUse the \"Selected polyline\" option and select the line created in step 2\nIn the \"Settings\" tab  select \"Full resolution enabled\". This will use the native resolution of the DTM.\nIn the \"Table\" tab \"Create Temporary layer\"\nExport that layer in GeoJSON format (pattern : M-1011-[Azimuth]-Profile.geojson) with CRS: EPSG:4326 - WGS 84\nIn the \"Table\" tab \"Copy to clipboard (with coordinates) and past that in a text file (pattern : M-1011-[Azimuth]-Profile.txt)."
+      },
+      "step_4": {
+        "name": "Generate the horizon files in Node.js",
+        "description": "Using the program \"get_horizon_data.js\" makeHorizons().\nThis will generate for each of the .geojson files two horizon files:\nM-1011-[Azimuth]-horizon.geojson: The altitude is a calculated as rectangle triangle.\nM-1011-[Azimuth]-horizon-ellipsoid.geojson: The altitude is a calculated using the WGS 84 ellipsoid.\nThe label property contains the azimuth and altitude (for use in QGis).\nTheoritical altitudes lower than sealevel altitude for this location are set at the sealevel altitude and the distance at 35 Km. "
+      }
+    }
+  },
+  "data_synopsis": {
+    "min_azimuth": 115.9881,
+    "max_azimuth": 126.4909,
+    "azimuth_range": 10.502799999999993,
+    "min_altitude": -0.48,
+    "max_altitude": 0.6789000041086936,
+    "altitude_range": 1.1589000041086934
+  },
+  "data": [
+    [
+      115.9881,
+      0.6341739309395753
+    ],
+    [
+      116.0592,
+      0.640478089919595
+    ],
+    [
+      116.1566,
+      0.6456624515499129
+    ],
+    [
+      116.2538,
+      0.6532681973560522
+    ],
+    [
+      116.3504,
+      0.6529191213799431
+    ],
+    [
+      116.4649,
+      0.6357834717407528
+    ],
+    [
+      116.5438,
+      0.6486348959948753
+    ],
+    [
+      116.6575,
+      0.6789000041086936
+    ],
+    [
+      116.7445,
+      0.6754461128570274
+    ],
+    [
+      116.8491,
+      0.6426501176907856
+    ],
+    [
+      116.9456,
+      0.6090335926999709
+    ],
+    [
+      116.9734,
+      0.6186223304036688
+    ],
+    [
+      116.9758,
+      0.6186069981205301
+    ],
+    [
+      117.059,
+      0.6158420355338022
+    ],
+    [
+      117.1541,
+      0.6305911256901952
+    ],
+    [
+      117.2408,
+      0.57945149519536
+    ],
+    [
+      117.3446,
+      0.5372045358629124
+    ],
+    [
+      117.4491,
+      0.4845412891667952
+    ],
+    [
+      117.5445,
+      0.45294372066430405
+    ],
+    [
+      117.6537,
+      0.4163611179929591
+    ],
+    [
+      117.6572,
+      0.41649478114482436
+    ],
+    [
+      117.7509,
+      0.4004070216553778
+    ],
+    [
+      117.7555,
+      0.4003899540405241
+    ],
+    [
+      117.7579,
+      0.3956777188093405
+    ],
+    [
+      117.758,
+      0.3956734622569488
+    ],
+    [
+      117.8435,
+      0.38387014688677257
+    ],
+    [
+      117.8663,
+      0.3822144620155287
+    ],
+    [
+      117.9461,
+      0.35080409900436876
+    ],
+    [
+      118.0407,
+      0.3248540466559945
+    ],
+    [
+      118.1494,
+      0.2950983277578374
+    ],
+    [
+      118.2513,
+      0.2715363385486863
+    ],
+    [
+      118.347,
+      0.23684177286888128
+    ],
+    [
+      118.4454,
+      0.2228405977219047
+    ],
+    [
+      118.5147,
+      0.2047989840943676
+    ],
+    [
+      118.5486,
+      0.19423431890588883
+    ],
+    [
+      118.5732,
+      0.19023811208831776
+    ],
+    [
+      118.6297,
+      0.18139540855712005
+    ],
+    [
+      118.6322,
+      0.17982694129421667
+    ],
+    [
+      118.6516,
+      0.17408278171195152
+    ],
+    [
+      118.7508,
+      0.1490431416905535
+    ],
+    [
+      118.8591,
+      0.1382234058041543
+    ],
+    [
+      118.9277,
+      0.13542052735515825
+    ],
+    [
+      118.9303,
+      0.13543427071738362
+    ],
+    [
+      118.9596,
+      0.13210570180986983
+    ],
+    [
+      119.0433,
+      0.1287884724088729
+    ],
+    [
+      119.0584,
+      0.12881587216995005
+    ],
+    [
+      119.061,
+      0.12875199009543298
+    ],
+    [
+      119.1436,
+      0.12469006634406181
+    ],
+    [
+      119.223,
+      0.1134840936047229
+    ],
+    [
+      119.2255,
+      0.11349887060653124
+    ],
+    [
+      119.2436,
+      0.11341804112092424
+    ],
+    [
+      119.3434,
+      0.09296990773394719
+    ],
+    [
+      119.4526,
+      0.06407568073120322
+    ],
+    [
+      119.5404,
+      0.042515451062792094
+    ],
+    [
+      119.543,
+      0.04251947935554017
+    ],
+    [
+      119.5495,
+      0.04101107419864168
+    ],
+    [
+      119.59,
+      0.0332618673798528
+    ],
+    [
+      119.6293,
+      0.02089777902585436
+    ],
+    [
+      119.6487,
+      0.017812158824284247
+    ],
+    [
+      119.7477,
+      0.0054635654972941695
+    ],
+    [
+      119.8588,
+      0.022294238288129795
+    ],
+    [
+      119.9479,
+      -0.025188703919038973
+    ],
+    [
+      120.0503,
+      -0.07869084301110836
+    ],
+    [
+      120.1542,
+      -0.08028350930294802
+    ],
+    [
+      120.2456,
+      -0.10631274655761212
+    ],
+    [
+      120.3466,
+      -0.12251751626578383
+    ],
+    [
+      120.4576,
+      -0.13364414247629602
+    ],
+    [
+      120.5454,
+      -0.15592257789734829
+    ],
+    [
+      120.6492,
+      -0.19700799181099174
+    ],
+    [
+      120.7042,
+      -0.23021771103036043
+    ],
+    [
+      120.7496,
+      -0.250904095283367
+    ],
+    [
+      120.7762,
+      -0.25830436336698515
+    ],
+    [
+      120.8174,
+      -0.258191742700233
+    ],
+    [
+      120.8529,
+      -0.2691038420353712
+    ],
+    [
+      120.9012,
+      -0.2768603418256642
+    ],
+    [
+      120.9495,
+      -0.28310915017392646
+    ],
+    [
+      121.0558,
+      -0.3081825887277331
+    ],
+    [
+      121.1485,
+      -0.31953139616987386
+    ],
+    [
+      121.2445,
+      -0.32716411005384505
+    ],
+    [
+      121.3502,
+      -0.368208628036919
+    ],
+    [
+      121.4458,
+      -0.395822547379489
+    ],
+    [
+      121.5452,
+      -0.4095910691334956
+    ],
+    [
+      121.6465,
+      -0.4241728933342967
+    ],
+    [
+      121.7555,
+      -0.43634986649235974
+    ],
+    [
+      121.8563,
+      -0.4486300780132015
+    ],
+    [
+      121.9452,
+      -0.45409801142840994
+    ],
+    [
+      122.0513,
+      -0.4713850501852339
+    ],
+    [
+      122.1598,
+      -0.48
+    ],
+    [
+      122.2496,
+      -0.48
+    ],
+    [
+      122.3491,
+      -0.48
+    ],
+    [
+      122.3961,
+      -0.48
+    ],
+    [
+      122.4584,
+      -0.48
+    ],
+    [
+      122.5518,
+      -0.48
+    ],
+    [
+      122.6551,
+      -0.48
+    ],
+    [
+      122.7582,
+      -0.48
+    ],
+    [
+      122.8564,
+      -0.48
+    ],
+    [
+      122.9543,
+      -0.48
+    ],
+    [
+      123.0467,
+      -0.48
+    ],
+    [
+      123.5006,
+      -0.48
+    ],
+    [
+      124,
+      -0.48
+    ],
+    [
+      124.5097,
+      -0.48
+    ],
+    [
+      124.9984,
+      -0.48
+    ],
+    [
+      125.5043,
+      -0.48
+    ],
+    [
+      125.9966,
+      -0.48
+    ],
+    [
+      126.4909,
+      -0.48
+    ]
+  ]
+}

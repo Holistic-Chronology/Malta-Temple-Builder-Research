@@ -1,0 +1,76 @@
+{
+  "info": {
+    "reference": {
+      "date_generated": "2021-02-08T07:09:41.000Z",
+      "data_version": "1.54",
+      "description": "Set of azimuth / altitude pairs from Mnajdra South Temple Room 1 M-1011-Winter-solstice-upright-closure-point",
+      "author": {
+        "name": "Ronald Poell",
+        "profile": "https://www.researchgate.net/profile/Ronald-Poell"
+      },
+      "url": ""
+    },
+    "project": {
+      "name": "A holistic approach to the temple builder society in Malta",
+      "url": "https://www.researchgate.net/project/A-holistic-approach-to-the-temple-builder-society-in-Malta",
+      "sponsoring_bitcoin_address": "1LDuLDeuvbbjj8tprt7M7ThGYbaJV4BycL"
+    },
+    "software": {
+      "QGis": {
+        "version": "3.16.2",
+        "url": "https://qgis.org"
+      },
+      "get_horizon_data.js": {
+        "version": "1.05",
+        "author": "Ronald Poell",
+        "url": ""
+      }
+    },
+    "sources": {
+      "source_point": {
+        "name": "M-1011",
+        "description": "Mnajdra South, winter solstice upright, closure point",
+        "latitude": 35.82665894728086,
+        "longitude": 14.436185526231116,
+        "elevation": 83.83999633789062,
+        "source": "Coordinates from the GNSS survey of Hertitage Malta (Katya Stroud, Josef Caruana) and Ronald Poell on 2021-01-27",
+        "source_reference": "GNSS_20210127_GPS0062",
+        "used_elevation": "ground = 83.84"
+      },
+      "DTM": "SIntegraM data/service, (2018), Developing Spatial Data Integration for the Maltese Islands, Planning Authority, DTM_WGS84 (The DTM of Malta in WGS84 projection)",
+      "seaLevel_altitude": -0.272
+    },
+    "process": {
+      "step_1": {
+        "name": "Merging DTM tiles",
+        "description": "The tiles T4964 and T4965 have been merged using gdal because the tool used for the elevation profiles does not work across several tiles.\ngdal_merge.py -ot Float32 -of GTiff -o /Path_To_Output/T4964-T4965.tif --optfile mergeInputFiles.txt\nmergeInputFiles.txt:\n\"/Path_To_Input/T4964.tif\"\n\"/Path_To_Input/T4965.tif\""
+      },
+      "step_2": {
+        "name": "Create to horizon azimuths in QGis",
+        "description": "Using \"Geodesic measure tool\", manually add the starting point (M-1011) coordinates.\nDraw a line to the end of the DTM tile.\nSave the to a (temporary) layer\nExport that layer in GeoJSON format (pattern : M-1011-[Azimuth].geojson) with CRS: EPSG:4326 - WGS 84"
+      },
+      "step_3": {
+        "name": "Create the elevation profiles in QGis",
+        "description": "Using the \"Terrain profile\" tool:\nAdd the DTM tile\nUse the \"Selected polyline\" option and select the line created in step 2\nIn the \"Settings\" tab  select \"Full resolution enabled\". This will use the native resolution of the DTM.\nIn the \"Table\" tab \"Create Temporary layer\"\nExport that layer in GeoJSON format (pattern : M-1011-[Azimuth]-Profile.geojson) with CRS: EPSG:4326 - WGS 84\nIn the \"Table\" tab \"Copy to clipboard (with coordinates) and past that in a text file (pattern : M-1011-[Azimuth]-Profile.txt)."
+      },
+      "step_4": {
+        "name": "Generate the horizon files in Node.js",
+        "description": "Using the program \"get_horizon_data.js\" makeHorizons().\nThis will generate for each of the .geojson files two horizon files:\nM-1011-[Azimuth]-horizon.geojson: The altitude is a calculated as rectangle triangle.\nM-1011-[Azimuth]-horizon-ellipsoid.geojson: The altitude is a calculated using the WGS 84 ellipsoid.\nThe label property contains the azimuth and altitude (for use in QGis).\nTheoritical altitudes lower than sealevel altitude for this location are set at the sealevel altitude and the distance at 35 Km. "
+      }
+    }
+  },
+  "data_synopsis": {
+    "min_azimuth": 109.8221,
+    "max_azimuth": 109.8221,
+    "azimuth_range": 0,
+    "min_altitude": 2.013621435617044,
+    "max_altitude": 2.013621435617044,
+    "altitude_range": 0
+  },
+  "data": [
+    [
+      109.8221,
+      2.013621435617044
+    ]
+  ]
+}

@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "M-1011-120",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "label": "1.04 km", "value": 1.0374154994531664, "units": "km", "heading_to": 120.10999060038488, "heading_from": -59.884196722425941, "total_dist": 1.0374154994531664 }, "geometry": { "type": "LineString", "coordinates": [ [ 14.436185526231117, 35.826658947280862 ], [ 14.446116603145796, 35.821968094936267 ] ] } }
+]
+}

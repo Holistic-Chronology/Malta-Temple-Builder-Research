@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this data, please cite it as below."
+authors:
+- family-names: "Poell"
+  given-names: "Ronald"
+  orcid: "https://orcid.org/0000-0002-1161-5911"
+title: "Mnajdra horizons for M-1011 (South) and M-1028 (North). Data, method and software."
+version: 1.0.0
+date-released: 2023-01-22
+url: "https://github.com/Holistic-Chronology/Malta-Temple-Builder-Research/blob/main/Horizons"

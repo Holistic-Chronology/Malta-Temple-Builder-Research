@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "M-1028-121",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "label": "1.05 km", "value": 1.0476066776347204, "units": "km", "heading_to": 121.94519427566944, "heading_from": -58.04904798456289, "total_dist": 1.0476066776347204 }, "geometry": { "type": "LineString", "coordinates": [ [ 14.436240233803508, 35.826784019435941 ], [ 14.44607745556624, 35.821787959484119 ] ] } }
+]
+}
