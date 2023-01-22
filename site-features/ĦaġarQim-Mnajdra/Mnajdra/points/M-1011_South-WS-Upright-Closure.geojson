@@ -1,0 +1,1 @@
+{ "type": "Feature", "properties": { "name": "M-1011", "Description": "Mnajdra South, winter solstice upright, closure point", "GNSS": "GNSS_20210127_GPS0062", "authors": "Katya Stroud, Josef Caruana, Ronald Poell" }, "geometry": { "type": "Point", "coordinates": [ 14.436185526231116, 35.82665894728086, 83.84 ] } }

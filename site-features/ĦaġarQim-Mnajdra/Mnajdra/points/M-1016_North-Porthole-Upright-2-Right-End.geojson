@@ -1,0 +1,1 @@
+{ "type": "Feature", "properties": { "name": "M-1016", "Description": "Mnajdra North, Porthole upright 2, Right, End", "GNSS": "GNSS_20210127_GPS0076", "authors": "Katya Stroud, Josef Caruana, Ronald Poell" }, "geometry": { "type": "Point", "coordinates": [ 14.43631154743602, 35.82676552554231, 86.123313 ] } }

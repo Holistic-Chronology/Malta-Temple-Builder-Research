@@ -1,0 +1,1 @@
+{ "type": "Feature", "properties": { "name": "M-1019", "Description": "Mnajdra North, Room 7, Right Seat, Right Upright, Left", "GNSS": "GNSS_20210127_GPS0080", "authors": "Katya Stroud, Josef Caruana, Ronald Poell" }, "geometry": { "type": "Point", "coordinates": [ 14.436289360405416, 35.82679889096319, 86.147793 ] } }

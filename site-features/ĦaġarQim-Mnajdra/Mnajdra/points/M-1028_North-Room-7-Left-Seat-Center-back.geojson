@@ -1,0 +1,1 @@
+{ "type": "Feature", "properties": { "name": "M-1028", "Description": "Mnajdra North, Room 7, Left Seat, Center back", "source": "distances: M-1016 6.792, M-1017 5.979, M-1018 1.892, M-1019 4.701", "authors": "Ronald Poell" }, "geometry": { "type": "Point", "coordinates": [ 14.436240233803506, 35.826784019435934, 85.38 ] } }
