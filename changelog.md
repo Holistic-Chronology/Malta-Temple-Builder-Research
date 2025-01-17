@@ -1,3 +1,11 @@
+# Version 1.2.0
+2025-01-17
+
+- New video_transcriptions section
+- Added site-features Readme
+- reorganised site-features
+
+
 # Version 1.1.0
 2023-01-22
 
