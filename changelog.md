@@ -1,3 +1,9 @@
+# Version 1.3.0
+
+- New books section
+- added two books by Themistocles Zammit from 1925 and 1927
+
+
 # Version 1.2.0
 2025-01-17
 
