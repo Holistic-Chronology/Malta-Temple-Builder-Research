@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Water resources for the Neolithic Ħaġar Qim – Mnajdra cluster - Figure 45</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; color: #333; }
+    img { max-width: 100%; border-radius: 8px; }
+    .meta, .caption { margin-top: 1rem; }
+    .caption { font-style: italic; }
+    header {background: #2c3e50; color: #ecf0f1; padding: 1rem 2rem;}
+    header h1 { margin: 0; font-size: 1.6rem; }
+    header p { margin: 0.5rem 0 0; font-size: 0.95rem; }
+    a { color: #007acc; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Water resources for the Neolithic Ħaġar Qim – Mnajdra cluster - Figure 45</h1>
+    <p>https://www.researchgate.net/publication/your-article</p>
+    <p>Ronald Poell</p>
+    <div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+        <img src="https://licensebuttons.net/l/by/4.0/88x31.png" alt="Creative Commons License" style="height: 31px;">
+      </a>
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color: #ecf0f1; text-decoration: none;">
+        Creative Commons Attribution 4.0 International License
+      </a>
+    </div>
+  </header>
+
+  <img id="mainImage" src="images/042542-SAM_2593.JPG" alt="Figure 45">
+  <div class="meta" id="meta">Loading metadata…</div>
+  <div class="caption">Figure 45: View to the north-east. Southern part of the wall HQMA-1025. The cistern (HQMA-1024) is immediately to the bottom left of the image. The shelter of Ħaġar Qim is visible in the top right. (042542)</div>
+  <p><a href="../index.html">← Gallery</a></p>
+
+  <script>
+    function formatUTCDate(date) {
+      return date.toISOString().replace("T", " ").split(".")[0];
+    }
+
+    function toDecimal(coord, ref) {
+      const [d, m, s] = coord;
+      let dec = d + m / 60 + s / 3600;
+      return (ref === 'S' || ref === 'W') ? -dec : dec;
+    }
+
+    function makeGoogleMapsLink(lat, lon) {
+      return `https://maps.google.com/?q=${lat},${lon}`;
+    }
+
+    const img = document.getElementById("mainImage");
+    const meta = document.getElementById("meta");
+
+    img.onload = () => {
+      console.log(`img.complete: ${img.complete}, img.naturalHeight: ${img.naturalHeight}`);
+      EXIF.getData(img, function () {
+        let date = EXIF.getTag(this, 'DateTimeOriginal');
+        const lat = EXIF.getTag(this, 'GPSLatitude');
+        const lon = EXIF.getTag(this, 'GPSLongitude');
+        const latRef = EXIF.getTag(this, 'GPSLatitudeRef') || "N";
+        const lonRef = EXIF.getTag(this, 'GPSLongitudeRef') || "E";
+
+        let gpsStr = "N/A";
+        if (lat && lon && latRef && lonRef) {
+          const latDec = toDecimal(lat, latRef).toFixed(6);
+          const lonDec = toDecimal(lon, lonRef).toFixed(6);
+          gpsStr = `<a href="${makeGoogleMapsLink(latDec, lonDec)}" target="_blank">${latDec}, ${lonDec}</a>`;
+        }
+
+        if (date) {
+          const fixedDate = new Date(date.replace(/^(\d{4}):(\d{2}):(\d{2})/, "$1-$2-$3").replace(" ", "T") + "Z");
+          meta.innerHTML = `<strong>Date:</strong> ${formatUTCDate(fixedDate)}<br><strong>GPS:</strong> ${gpsStr}`;
+        } else {
+          fetch(img.src, { method: 'HEAD', cache: 'no-store' })
+            .then(resp => {
+              const lastModified = resp.headers.get('Last-Modified');
+              if (lastModified) {
+                const lmDate = new Date(lastModified);
+                meta.innerHTML = `<strong>Date:</strong> ${formatUTCDate(lmDate)}<br><strong>GPS:</strong> ${gpsStr}`;
+              } else {
+                meta.innerHTML = `<strong>Date:</strong> N/A<br><strong>GPS:</strong> ${gpsStr}`;
+              }
+            })
+            .catch(() => {
+              meta.innerHTML = `<strong>Date:</strong> N/A<br><strong>GPS:</strong> ${gpsStr}`;
+            });
+        }
+      });
+    };
+
+    if (img.complete && img.naturalHeight !== 0) img.onload();
+  </script>
+</body>
+</html>
