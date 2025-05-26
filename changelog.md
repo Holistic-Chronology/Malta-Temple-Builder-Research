@@ -1,3 +1,8 @@
+# Version 1.3.2
+
+- Added Wied Ħoxt features
+- QGIS style definition for cart-ruts
+
 # Version 1.3.1
 
 - Added two versions of book by Cesare Vassallo (1851 an 1876)
